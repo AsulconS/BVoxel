@@ -7,7 +7,7 @@
 class Texture
 {
 private:
-    GLuint m_texture;
+    GLuint texture;
 
 public:
     Texture(const std::string& fileName);

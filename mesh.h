@@ -29,7 +29,7 @@ private:
 
     GLuint m_vertexArrayObject;
     GLuint m_vertexArrayBuffers[NUM_BUFFERS];
-    unsigned int m_drawCount;
+    unsigned int drawCount;
 
 public:
     Mesh(Vertex* vertices, unsigned int numVertices);

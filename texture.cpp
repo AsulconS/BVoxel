@@ -11,8 +11,8 @@ Texture::Texture(const std::string& fileName)
     if(imageData == nullptr)
         std::cerr << "Texture loading failed for texture: " << fileName << std::endl;
 
-    glGenTextures(1, &m_texture);
-    glBindTexture(GL_TEXTURE_2D, m_texture);
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -27,7 +27,7 @@ Texture::Texture(const std::string& fileName)
 
 Texture::~Texture()
 {
-    glDeleteTextures(1, &m_texture);
+    glDeleteTextures(1, &texture);
 }
 
 void Texture::bind(unsigned int unit)
@@ -35,5 +35,5 @@ void Texture::bind(unsigned int unit)
     assert(unit >= 0 && unit <= 31);
 
     glActiveTexture(GL_TEXTURE0 + unit);
-    glBindTexture(GL_TEXTURE_2D, m_texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
 }

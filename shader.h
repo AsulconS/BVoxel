@@ -14,8 +14,8 @@ private:
         NUM_SHADERS
     };
 
-    GLuint m_program;
-    GLuint m_shaders[NUM_SHADERS];
+    GLuint program;
+    GLuint shaders[NUM_SHADERS];
 
     // Private Functions
     std::string loadShader(const std::string& fileName); // Load the file and return it into a string

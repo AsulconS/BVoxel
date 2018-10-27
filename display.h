@@ -7,10 +7,10 @@
 class Display
 {
 private:
-    bool m_isClosed;
+    bool closed;
 
-    SDL_Window* m_window;
-    SDL_GLContext m_glContext;
+    SDL_Window* window;
+    SDL_GLContext glContext;
 
 public:
     Display(int width, int height, const std::string& title);
@@ -19,7 +19,7 @@ public:
     void update();
     void clear(float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 0.0f);
 
-    bool isClosed() const { return m_isClosed; }
+    bool isClosed() const { return closed; }
 };
 
 #endif // DISPLAY_H

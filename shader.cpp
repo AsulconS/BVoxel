@@ -5,41 +5,41 @@
 Shader::Shader(const std::string& fileName)
 {
     // HANDLE of the program
-    m_program = glCreateProgram();
+    program = glCreateProgram();
     // Creating Shaders and save HANDLEs
-    m_shaders[VERTEX_SHADER] = createShader(loadShader(fileName + ".vs"), GL_VERTEX_SHADER);
-    m_shaders[FRAGMENT_SHADER] = createShader(loadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
+    shaders[VERTEX_SHADER] = createShader(loadShader(fileName + ".vs"), GL_VERTEX_SHADER);
+    shaders[FRAGMENT_SHADER] = createShader(loadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
 
     // Attaching the Shaders to the program
     for(unsigned int i = 0; i < NUM_SHADERS; ++i)
-        glAttachShader(m_program, m_shaders[i]);
+        glAttachShader(program, shaders[i]);
     
     // Setting the vertex attribute of the program in the index 0 with the variable "position"
-    glBindAttribLocation(m_program, 0, "position");
-    glBindAttribLocation(m_program, 1, "texCoord");
+    glBindAttribLocation(program, 0, "position");
+    glBindAttribLocation(program, 1, "texCoord");
 
     // Linking of Program
-    glLinkProgram(m_program);
-    checkShaderError(m_program, GL_LINK_STATUS, true, "Error: Program linking failed");
+    glLinkProgram(program);
+    checkShaderError(program, GL_LINK_STATUS, true, "Error: Program linking failed");
 
     // Validation of Program
-    glValidateProgram(m_program);
-    checkShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
+    glValidateProgram(program);
+    checkShaderError(program, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
 }
 
 Shader::~Shader()
 {
     for(unsigned int i = 0; i < NUM_SHADERS; ++i)
     {
-        glDetachShader(m_program, m_shaders[i]);
-        glDeleteShader(m_shaders[i]);
+        glDetachShader(program, shaders[i]);
+        glDeleteShader(shaders[i]);
     }
-    glDeleteProgram(m_program);
+    glDeleteProgram(program);
 }
 
 void Shader::bind()
 {
-    glUseProgram(m_program);
+    glUseProgram(program);
 }
 
 // Create a Shader and return its HANDLE

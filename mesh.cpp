@@ -4,7 +4,7 @@
 Mesh::Mesh(Vertex* vertices, unsigned int numVertices)
 {
     // Draw count defined to draw later
-    m_drawCount = numVertices;
+    drawCount = numVertices;
 
     // Generating Vertex Arrays (HANDLERS) and Binding
     glGenVertexArrays(1, &m_vertexArrayObject);
@@ -53,7 +53,7 @@ void Mesh::draw()
 {
     glBindVertexArray(m_vertexArrayObject);
 
-    glDrawArrays(GL_TRIANGLES, 0, m_drawCount);
+    glDrawArrays(GL_TRIANGLES, 0, drawCount);
 
     glBindVertexArray(0);
 }

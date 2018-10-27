@@ -13,8 +13,8 @@ Display::Display(int width, int height, const std::string& title)
     SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
-    m_glContext = SDL_GL_CreateContext(m_window);
+    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
+    glContext = SDL_GL_CreateContext(window);
 
     GLenum status = glewInit();
 
@@ -23,26 +23,26 @@ Display::Display(int width, int height, const std::string& title)
         std::cerr << "Glew Failed to Initialize" << std::endl;
     }
 
-    m_isClosed = false;
+    closed = false;
 }
 
 Display::~Display()
 {
-    SDL_GL_DeleteContext(m_glContext);
-    SDL_DestroyWindow(m_window);
+    SDL_GL_DeleteContext(glContext);
+    SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
 void Display::update()
 {
-    SDL_GL_SwapWindow(m_window);
+    SDL_GL_SwapWindow(window);
 
     SDL_Event e;
 
     while(SDL_PollEvent(&e))
     {
         if(e.type == SDL_QUIT)
-            m_isClosed = true;
+            closed = true;
     }
 }
 

@@ -1,8 +1,10 @@
 #ifndef MESH_H
 #define MESH_H
 
+#include "obj_loader.h"
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <string>
 
 class Vertex
 {
@@ -15,15 +17,23 @@ private:
 public:
     Vertex(const glm::vec3& pos, const glm::vec2 texCoord)
         : pos(pos), texCoord(texCoord) {}
+    
+    inline glm::vec3* getPos() { return &pos; }
+    inline glm::vec2* getTexCoord() { return &texCoord; }
 };
 
 class Mesh
 {
 private:
+    void initMesh(const IndexedModel& model);
+    
     enum
     {
         POSITION_VB,
         TEXTCOORD_VB,
+
+        INDEX_VB,
+
         NUM_BUFFERS,
     };
 
@@ -32,7 +42,8 @@ private:
     unsigned int drawCount;
 
 public:
-    Mesh(Vertex* vertices, unsigned int numVertices);
+    Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
+    Mesh(const std::string& fileName);
     virtual ~Mesh();
 
     void draw();

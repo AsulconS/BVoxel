@@ -13,12 +13,14 @@ private:
     {
         VERTEX_SHADER,
         FRAGMENT_SHADER,
+        
         NUM_SHADERS
     };
 
     enum
     {
         TRANSFORM_U,
+
         NUM_UNIFORMS
     };
 

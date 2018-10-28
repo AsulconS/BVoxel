@@ -37,6 +37,8 @@ int main()
 
         transform.getPos().x = sinCounter;
         transform.getPos().z = cosCounter;
+        transform.getRot().x = counter;
+        transform.getRot().y = counter;
         transform.getRot().z = counter;
         //transform.setScale(glm::vec3(cosCounter, cosCounter, cosCounter));
 

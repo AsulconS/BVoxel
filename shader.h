@@ -1,6 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include "transform.h"
 #include <GL/glew.h>
 #include <string>
 
@@ -14,8 +15,15 @@ private:
         NUM_SHADERS
     };
 
+    enum
+    {
+        TRANSFORM_U,
+        NUM_UNIFORMS
+    };
+
     GLuint program;
     GLuint shaders[NUM_SHADERS];
+    GLuint uniforms[NUM_UNIFORMS];
 
     // Private Functions
     std::string loadShader(const std::string& fileName); // Load the file and return it into a string
@@ -27,6 +35,7 @@ public:
     virtual ~Shader();
 
     void bind();
+    void update(const Transform& transform);
 };
 
 #endif // SHADER_H

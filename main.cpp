@@ -38,12 +38,13 @@ int main()
         float sinCounter = sinf(counter);
         float cosCounter = cosf(counter);
 
-        transform.getPos().x = sinCounter;
+        /*transform.getPos().x = sinCounter;
         transform.getPos().z = cosCounter;
         transform.getRot().x = counter;
         transform.getRot().y = counter;
-        transform.getRot().z = counter;
+        transform.getRot().z = counter;*/
         //transform.setScale(glm::vec3(cosCounter, cosCounter, cosCounter));
+        transform.getRot().y = counter;
 
         shader.bind();
         texture.bind(0);

@@ -17,6 +17,7 @@ Shader::Shader(const std::string& fileName)
     // Setting the vertex attribute of the program in the index 0 with the variable "position"
     glBindAttribLocation(program, 0, "position");
     glBindAttribLocation(program, 1, "texCoord");
+    glBindAttribLocation(program, 2, "normal");
 
     // Linking of Program
     glLinkProgram(program);

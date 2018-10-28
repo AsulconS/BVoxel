@@ -14,8 +14,9 @@ Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, un
 
     for(unsigned int i = 0; i < numVertices; ++i)
     {
-        model.positions.push_back(vertices[i].pos);
-        model.texCoords.push_back(vertices[i].texCoord);
+        model.positions.push_back(*vertices[i].getPos());
+        model.texCoords.push_back(*vertices[i].getTexCoord());
+        model.normals.push_back(*vertices[i].getNormal());
     }
 
     for(unsigned int i = 0; i < numIndices; ++i)
@@ -54,8 +55,16 @@ void Mesh::initMesh(const IndexedModel& model)
     // Creating the Vertex Attrib Array (e.g. Vertex::pos is an atribute)
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
+    // Creating and initializating the Data for the Buffer
+    glBufferData(GL_ARRAY_BUFFER, model.normals.size() * sizeof(model.normals[0]), &model.normals[0], GL_STATIC_DRAW);
 
-    // For Texture Buffers
+    // Creating the Vertex Attrib Array (e.g. Vertex::pos is an atribute)
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    // For Index Buffers
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
     // Creating and initializating the Data for the Buffer
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, model.indices.size() * sizeof(model.indices[0]), &model.indices[0], GL_STATIC_DRAW);

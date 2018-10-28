@@ -13,13 +13,15 @@ class Vertex
 private:
     glm::vec3 pos;
     glm::vec2 texCoord;
+    glm::vec3 normal;
 
 public:
-    Vertex(const glm::vec3& pos, const glm::vec2 texCoord)
-        : pos(pos), texCoord(texCoord) {}
+    Vertex(const glm::vec3& pos, const glm::vec2& texCoord, const glm::vec3& normal = glm::vec3(0,0,0))
+        : pos(pos), texCoord(texCoord), normal(normal) {}
     
     inline glm::vec3* getPos() { return &pos; }
     inline glm::vec2* getTexCoord() { return &texCoord; }
+    inline glm::vec3* getNormal() { return &normal; }
 };
 
 class Mesh
@@ -31,6 +33,7 @@ private:
     {
         POSITION_VB,
         TEXTCOORD_VB,
+        NORMAL_VB,
 
         INDEX_VB,
 

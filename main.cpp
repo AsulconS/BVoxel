@@ -4,13 +4,17 @@
 #include "mesh.h"
 #include "texture.h"
 #include "transform.h"
+#include "camera.h"
 #include <GL/glew.h>
 #include <GL/glu.h>
 #include <iostream>
 
+#define WIDTH 800
+#define HEIGHT 600
+
 int main()
 {
-    Display display(800, 600, "BVoxel Test Window");
+    Display display(WIDTH, HEIGHT, "BVoxel Test Window");
 
     Vertex vertices[] = { Vertex(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 0.0f)),
                           Vertex(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec2(0.5f, 1.0f)),
@@ -19,6 +23,7 @@ int main()
     Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]));
     Shader shader("./res/basicShader");
     Texture texture("./res/bricks.jpg");
+    Camera camera(glm::vec3(0, 0, -2), 70.0f, (float)WIDTH / (float)HEIGHT, 0.01f, 1000.0f);
     Transform transform;
 
     float counter = 0.0f;
@@ -31,12 +36,13 @@ int main()
         float cosCounter = cosf(counter);
 
         transform.getPos().x = sinCounter;
-        transform.getRot().z = sinCounter;
-        transform.setScale(glm::vec3(cosCounter, cosCounter, cosCounter));
+        transform.getPos().z = cosCounter;
+        transform.getRot().z = counter;
+        //transform.setScale(glm::vec3(cosCounter, cosCounter, cosCounter));
 
         shader.bind();
         texture.bind(0);
-        shader.update(transform);
+        shader.update(transform, camera);
         mesh.draw();
 
         display.update();

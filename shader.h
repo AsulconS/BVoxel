@@ -2,6 +2,7 @@
 #define SHADER_H
 
 #include "transform.h"
+#include "camera.h"
 #include <GL/glew.h>
 #include <string>
 
@@ -35,7 +36,7 @@ public:
     virtual ~Shader();
 
     void bind();
-    void update(const Transform& transform);
+    void update(const Transform& transform, const Camera& camera);
 };
 
 #endif // SHADER_H

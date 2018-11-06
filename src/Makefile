@@ -1,7 +1,9 @@
 CC=g++
 CC2=gcc
 
-all: stb_image.o obj_loader.o display.o shader.o mesh.o texture.o main.o
+all: compileAll move clean
+
+compileAll: stb_image.o obj_loader.o display.o shader.o mesh.o texture.o main.o
 	$(CC) stb_image.o obj_loader.o display.o shader.o mesh.o texture.o main.o -lSDL2 -lGL -lGLU -lGLEW -o main
 
 stb_image.o: stb_image.c
@@ -25,5 +27,11 @@ texture.o: texture.cpp
 main.o: main.cpp
 	$(CC) -c main.cpp
 
+move:
+	mv main ../
+
 clean:
-	rm -rf *.o main
+	rm -rf *.o
+
+noExe:
+	rm ../main

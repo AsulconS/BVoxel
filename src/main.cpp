@@ -5,6 +5,8 @@
 #include "texture.h"
 #include "transform.h"
 #include "camera.h"
+#include "core/iApplicationEventHandler.h"
+
 #include <GL/glew.h>
 #include <GL/glu.h>
 #include <iostream>
@@ -12,9 +14,25 @@
 #define WIDTH 800
 #define HEIGHT 600
 
+class TempEventHandler : public IApplicationEventHandler
+{
+public:
+    bool keyDown = false;
+    TempEventHandler() {}
+    virtual void onKeyDown(uint32 keyCode, bool isRepeat)
+    {
+        keyDown = true;
+    }
+    virtual void onKeyUp(uint32 keyCode, bool isRepeat)
+    {
+        keyDown = false;
+    }
+};
+
 int main()
 {
     Display display(WIDTH, HEIGHT, "BVoxel Test Window");
+    TempEventHandler eventHandler;
 
     Vertex vertices[] = { Vertex(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 0.0f)),
                           Vertex(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec2(0.5f, 1.0f)),
@@ -23,9 +41,9 @@ int main()
     unsigned int indices[] = { 0, 1, 2 };
 
     Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-    Mesh mesh2("./res/basicman.obj");
-    Shader shader("./res/basicShader");
-    Texture texture("./res/bricks.jpg");
+    Mesh mesh2("res/basicman.obj");
+    Shader shader("res/basicShader");
+    Texture texture("res/bricks.jpg");
     Camera camera(glm::vec3(0, 0, -24), 70.0f, (float)WIDTH / (float)HEIGHT, 0.01f, 1000.0f);
     Transform transform;
 
@@ -51,8 +69,9 @@ int main()
         shader.update(transform, camera);
         mesh2.draw();
 
-        display.update();
-        counter += 0.0001f;
+        display.update(eventHandler);
+        if(eventHandler.keyDown)
+            counter += 0.0001f;
     }
 
     return 0;

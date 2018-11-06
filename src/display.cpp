@@ -39,7 +39,7 @@ Display::~Display()
     SDL_Quit();
 }
 
-void Display::update()
+void Display::update(IApplicationEventHandler& eventHandler)
 {
     SDL_GL_SwapWindow(window);
 
@@ -47,8 +47,29 @@ void Display::update()
 
     while(SDL_PollEvent(&e))
     {
-        if(e.type == SDL_QUIT)
-            closed = true;
+        switch(e.type)
+        {
+            case SDL_KEYDOWN:
+                eventHandler.onKeyDown(e.key.keysym.scancode, e.key.repeat != 0);
+                break;
+            case SDL_KEYUP:
+                eventHandler.onKeyUp(e.key.keysym.scancode, e.key.repeat != 0);
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                eventHandler.onMouseDown(e.button.button, e.button.clicks);
+                break;
+            case SDL_MOUSEBUTTONUP:
+                eventHandler.onMouseUp(e.button.button, e.button.clicks);
+                break;
+            case SDL_MOUSEMOTION:
+                eventHandler.onMouseMove(e.motion.x, e.motion.y, e.motion.xrel, e.motion.yrel);
+                break;
+            case SDL_QUIT:
+                closed = true;
+                break;
+            default:
+                break;
+        }
     }
 }
 

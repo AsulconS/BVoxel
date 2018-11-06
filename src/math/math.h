@@ -1,6 +1,6 @@
 namespace Math
 {
-    template<typename T>
+    template <typename T>
     T clamp(const T& val, const T& min, const T& max)
     {
         if(val > max)

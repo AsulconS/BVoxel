@@ -41,9 +41,9 @@ int main()
     unsigned int indices[] = { 0, 1, 2 };
 
     Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-    Mesh mesh2("res/basicman.obj");
-    Shader shader("res/basicShader");
-    Texture texture("res/bricks.jpg");
+    Mesh mesh2("src/res/basicman.obj");
+    Shader shader("src/res/basicShader");
+    Texture texture("src/res/bricks.jpg");
     Camera camera(glm::vec3(0, 0, -24), 70.0f, (float)WIDTH / (float)HEIGHT, 0.01f, 1000.0f);
     Transform transform;
 

@@ -2,11 +2,16 @@
 #define GAME_EVENT_HANDLER_H
 
 #include "common.h"
+#include "map.h"
+#include "vector.h"
 #include "core/iApplicationEventHandler.h"
 #include "inputControl.h"
 
 class GameEventHandler : public IApplicationEventHandler
 {
+private:
+    Map<uint32, Vector<std::pair<float, InputControl&>>> inputs;
+
 public:
     GameEventHandler() {}
     virtual ~GameEventHandler() {}

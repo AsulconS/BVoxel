@@ -1,12 +1,9 @@
 #ifndef GAME_EVENT_HANDLER_H
 #define GAME_EVENT_HANDLER_H
 
+#include "common.h"
 #include "core/iApplicationEventHandler.h"
 #include "inputControl.h"
-
-typedef unsigned char uint8;
-typedef unsigned int uint32;
-typedef int int32;
 
 class GameEventHandler : public IApplicationEventHandler
 {

@@ -7,6 +7,7 @@ class InputControl
 {
 private:
     float amt;
+
 public:
     InputControl();
 

@@ -1,7 +1,4 @@
 #include "texture.h"
-#include "stb_image.h"
-#include <cassert>
-#include <iostream>
 
 Texture::Texture(const std::string& fileName)
 {

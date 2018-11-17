@@ -1,16 +1,18 @@
 #ifndef GAME_EVENT_HANDLER_H
 #define GAME_EVENT_HANDLER_H
 
-#include "common.h"
-#include "map.h"
-#include "vector.h"
+#include "core/common.h"
 #include "core/iApplicationEventHandler.h"
+#include "core/input.h"
+#include "dStr/map.h"
+#include "dStr/vector.h"
 #include "inputControl.h"
 
 class GameEventHandler : public IApplicationEventHandler
 {
 private:
     Map<uint32, Vector<std::pair<float, InputControl&>>> inputs;
+    void updateInput(uint32 inputCode, float dir, bool isRepeat);
 
 public:
     GameEventHandler() {}

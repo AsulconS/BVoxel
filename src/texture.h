@@ -1,8 +1,12 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+#include "stb_image.h"
+
 #include <GL/glew.h>
 #include <string>
+#include <cassert>
+#include <iostream>
 
 class Texture
 {

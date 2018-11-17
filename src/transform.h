@@ -1,7 +1,9 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
-
 #define GLM_ENABLE_EXPERIMENTAL
+
+#include "math/math.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 
@@ -30,12 +32,23 @@ public:
         return posMatrix * rotMatrix * scaleMatrix;
     }
 
-    inline glm::vec3& getPos() { return pos; }
+    inline glm::vec3 getPos() { return glm::vec3(pos.y, pos.z, pos.x); }
     inline glm::vec3& getRot() { return rot; }
     inline glm::vec3& getScale() { return scale; }
 
-    inline void setPos(const glm::vec3& pos) { this->pos = pos; }
-    inline void setRot(const glm::vec3& rot) { this->rot = rot; }
+    inline void setTranslation(const glm::vec3& offset)
+    {
+        this->pos.x += offset.y * -1.0f;
+        this->pos.y += offset.z;
+        this->pos.z += offset.x;
+    }
+    inline void setPosition(const glm::vec3& _pos)
+    {
+        this->pos.x = _pos.y * -1.0f;
+        this->pos.y = _pos.z;
+        this->pos.z = _pos.x;
+    }
+    inline void setRotation(const glm::vec3& rot) { this->rot = rot; }
     inline void setScale(const glm::vec3& scale) { this->scale = scale; }
 };
 

@@ -1,6 +1,4 @@
 #include "mesh.h"
-#include "obj_loader.h"
-#include <vector>
 
 Mesh::Mesh(const std::string& fileName)
 {

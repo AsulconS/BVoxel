@@ -2,9 +2,11 @@
 #define MESH_H
 
 #include "obj_loader.h"
+
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <string>
+#include <vector>
 
 class Vertex
 {

@@ -11,7 +11,7 @@ CC			= gcc
 LIBS 		= -lSDL2 -lGL -lGLU -lGLEW
 RM			= rm -f
 RMR			= rm -rf
-OBJECTS		= stb_image.o obj_loader.o display.o shader.o mesh.o texture.o main.o
+OBJECTS		= stb_image.o obj_loader.o display.o shader.o mesh.o texture.o gameEventHandler.o main.o
 COMPILE_CC 	= $(CC) -c $*.c
 COMPILE_CXX	= $(CXX) -c $*.cpp
 
@@ -47,6 +47,9 @@ mesh.o: mesh.cpp
 	$(COMPILE_CXX)
 
 texture.o: texture.cpp
+	$(COMPILE_CXX)
+
+gameEventHandler.o: gameEventHandler.cpp
 	$(COMPILE_CXX)
 
 main.o: main.cpp

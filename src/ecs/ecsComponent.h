@@ -19,6 +19,19 @@ private:
 public:
     static uint32 registerComponentType(ECSComponentCreateFunction createfn, ECSComponentFreeFunction freefn, size_t size);
     EntityHandle entity = NULL_ENTITY_HANDLE;
+
+    inline static ECSComponentCreateFunction getTypeCreateFunction(uint32 id)
+    {
+        return std::get<0>(componentTypes[id]);
+    }
+    inline static ECSComponentFreeFunction getTypeFreeFunction(uint32 id)
+    {
+        return std::get<1>(componentTypes[id]);
+    }
+    inline static size_t getTypeSize(uint32 id)
+    {
+        return std::get<2>(componentTypes[id]);
+    }
 };
 
 template <typename T>
@@ -48,7 +61,7 @@ void ECSComponentFree(BaseECSComponent* comp)
 }
 
 template <typename T>
-const uint32 ECSComponent<T>::ID(BaseECSComponent::nextID());
+const uint32 ECSComponent<T>::ID(BaseECSComponent::registerComponentType(ECSComponentCreate<T>, ECSComponentFree<T>, sizeof(T)));
 
 template <typename T>
 const size_t ECSComponent<T>::SIZE(sizeof(T));

@@ -1,5 +1,7 @@
 #include "ecsComponent.h"
 
+Vector<std::tuple<ECSComponentCreateFunction, ECSComponentFreeFunction, size_t>> BaseECSComponent::componentTypes;
+
 uint32 BaseECSComponent::registerComponentType(ECSComponentCreateFunction createfn, ECSComponentFreeFunction freefn, size_t size)
 {
     uint32 componentID = componentTypes.size();

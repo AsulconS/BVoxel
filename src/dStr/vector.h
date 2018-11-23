@@ -2,6 +2,7 @@
 #define ARRAY_H
 
 #include <vector>
+#include <tuple>
 
 #define Vector std::vector
 

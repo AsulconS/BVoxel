@@ -13,7 +13,11 @@ typedef void (*ECSComponentFreeFunction)(BaseECSComponent* comp);
 
 struct BaseECSComponent
 {
-    static uint32 nextID();
+private:
+    static Vector<std::tuple<ECSComponentCreateFunction, ECSComponentFreeFunction, size_t>> componentTypes;
+
+public:
+    static uint32 registerComponentType(ECSComponentCreateFunction createfn, ECSComponentFreeFunction freefn, size_t size);
     EntityHandle entity = NULL_ENTITY_HANDLE;
 };
 
@@ -55,7 +59,7 @@ const ECSComponentCreateFunction ECSComponent<T>::CREATE_FUNCTION(ECSComponentCr
 template <typename T>
 const ECSComponentFreeFunction ECSComponent<T>::FREE_FUNCTION(ECSComponentFree<T>);
 
-// TESTING CODE
+// TESTING COMPONENT
 struct TestComponent : public ECSComponent<TestComponent>
 {
     float x;

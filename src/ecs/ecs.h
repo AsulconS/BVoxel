@@ -25,6 +25,8 @@ private:
         return handleToRawType(handle)->second;
     }
 
+    void removeComponentInternal(uint32 componentID, uint32 index) {}
+
 public:
     ECS() {}
     ~ECS();

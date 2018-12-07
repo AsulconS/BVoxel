@@ -10,4 +10,14 @@ typedef unsigned int uint32;
 typedef signed long long int64;
 typedef unsigned long long uint64;
 
+#define LOG_ERROR "Error"
+#define LOG_WARNING "Warning"
+#define LOG_TYPE_RENDERER "Renderer"
+#define LOG_TYPE_IO "IO"
+#define DEBUG_LOG(category, level, message, ...) \
+    fprintf(stderr, "[%s] ", category); \
+    fprintf(stderr, "[%s] (%s:%d): ", level, __FILE__, __LINE__); \
+    fprintf(stderr, message, ##__VA_ARGS__); \
+    fprintf(stderr, "\n")
+
 #endif // COMMON_H

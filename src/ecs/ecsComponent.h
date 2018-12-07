@@ -32,6 +32,11 @@ public:
     {
         return std::get<2>(componentTypes[id]);
     }
+
+    inline static bool isTypeValid(uint32 id)
+    {
+        return id < componentTypes.size();
+    }
 };
 
 template <typename T>

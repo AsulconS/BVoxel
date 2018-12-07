@@ -4,6 +4,8 @@
 #include "ecsComponent.h"
 #include "ecsSystem.h"
 #include "../dStr/map.h"
+#include "../math/math.h"
+#include <cstring>
 
 class ECS
 {
@@ -25,7 +27,12 @@ private:
         return handleToRawType(handle)->second;
     }
 
-    void removeComponentInternal(uint32 componentID, uint32 index) {}
+    void deleteComponent(uint32 componentID, uint32 index);
+    bool removeComponentInternal(EntityHandle handle, uint32 componentID);
+    void addComponentInternal(EntityHandle handle, Vector<std::pair<uint32, uint32>>& entity, uint32 componentID, BaseECSComponent* component);
+    BaseECSComponent* getComponentInternal(Vector<std::pair<uint32, uint32>>& entityComponents, uint32 componentID);
+
+    void updateSystemWithMultipleComponents(uint32 index, const Vector<uint32>& componentTypes, Vector<BaseECSComponent*>& componentParam);
 
 public:
     ECS() {}
@@ -37,13 +44,22 @@ public:
 
     // Component Methods
     template <typename Component>
-    void addComponent(EntityHandle entity, Component* component);
+    inline void addComponent(EntityHandle entity, Component* component)
+    {
+        addComponentInternal(entity, handleToEntity(entity), Component::ID, component);
+    }
 
     template <typename Component>
-    void removeComponent(EntityHandle entity);
+    inline bool removeComponent(EntityHandle entity)
+    {
+        return removeComponentInternal(entity, Component::ID);
+    }
 
     template <typename Component>
-    void getComponent(EntityHandle entity);
+    Component* getComponent(EntityHandle entity)
+    {
+        return (Component*)getComponentInternal(handleToEntity(entity), Component::ID);
+    }
 
     // System Methods
     inline void addSystem(BaseECSSystem& system)
@@ -52,7 +68,7 @@ public:
     }
 
     void updateSystems();
-    void removeSystems(BaseECSSystem& system);
+    bool removeSystems(BaseECSSystem& system);
 };
 
 #endif // ECS_H

@@ -28,17 +28,6 @@ int main()
     InputControl zAxis;
     InputControl rotAxis;
 
-    /*
-    eventHandler.addKeyControl(Input::KEY_A, yAxis, -1.0f);
-    eventHandler.addKeyControl(Input::KEY_D, yAxis, 1.0f);
-    eventHandler.addKeyControl(Input::KEY_LEFT, yAxis, -1.0f);
-    eventHandler.addKeyControl(Input::KEY_RIGHT, yAxis, 1.0f);
-    eventHandler.addKeyControl(Input::KEY_W, zAxis, 1.0f);
-    eventHandler.addKeyControl(Input::KEY_S, zAxis, -1.0f);
-    eventHandler.addKeyControl(Input::KEY_UP, zAxis, 1.0f);
-    eventHandler.addKeyControl(Input::KEY_DOWN, zAxis, -1.0f);
-    */
-
     eventHandler.addKeyControl(Input::KEY_A, yAxis, -1.0f);
     eventHandler.addKeyControl(Input::KEY_D, yAxis, 1.0f);
     eventHandler.addKeyControl(Input::KEY_LEFT, yAxis, -1.0f);

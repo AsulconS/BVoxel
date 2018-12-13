@@ -20,4 +20,6 @@ typedef unsigned long long uint64;
     fprintf(stderr, message, ##__VA_ARGS__); \
     fprintf(stderr, "\n")
 
+#define ARRAY_SIZE(T) sizeof(T) / sizeof(T[0])
+
 #endif // COMMON_H

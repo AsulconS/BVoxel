@@ -45,7 +45,7 @@ int main()
     
     unsigned int indices[] = { 0, 1, 2 };
 
-    Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
+    Mesh mesh(vertices, ARRAY_SIZE(vertices), indices, ARRAY_SIZE(indices));
     Mesh mesh2("./res/basicman.obj");
     Shader shader("./res/basicShader");
     Texture texture("./res/bricks.jpg");

@@ -8,13 +8,14 @@ NOCOLOR		= "\033[0m"
 # Compiling MACROS
 CXX			= g++
 CC			= gcc
+CXXFLAGS	= -std=c++11
 LIBS 		= -lSDL2 -lGL -lGLU -lGLEW
 RM			= rm -f
 RMR			= rm -rf
 OBJECTS		= stb_image.o obj_loader.o display.o shader.o mesh.o texture.o gameEventHandler.o ecsComponent.o ecs.o main.o
 COMPILE_CC 	= $(CC) -c $*.c
-COMPILE_CXX	= $(CXX) -c $*.cpp
-COMPILE_CXX_ECS = $(CXX) -c ecs/$*.cpp
+COMPILE_CXX	= $(CXX) $(CXXFLAGS) -c $*.cpp
+COMPILE_CXX_ECS = $(CXX) $(CXXFLAGS) -c ecs/$*.cpp
 
 # Target
 TARGET		= BVoxel
@@ -27,7 +28,7 @@ prompt:
 $(TARGET): $(OBJECTS)
 	@echo $(YELLOW)
 	@echo Linking Files ...$(NOCOLOR)
-	$(CXX) $(OBJECTS) $(LIBS) -o $@
+	$(CXX) $(CXXFLAGS) $(OBJECTS) $(LIBS) -o $@
 	@echo $(GREEN)
 	@echo Successfully Compiled and Linked!
 	@echo $(NOCOLOR)
